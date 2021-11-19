@@ -29,21 +29,24 @@ const outOfNotes = (value) => {
   result = {};
   response = [];
 
-  result.onehundred = Math.floor(valor / 100);
-
-  if (result.oneHundred && amountOfNotes.oneHundred >= result.oneHundred) {
-    value -= 100 * result.oneHundred;
-    response.push(output(result.oneHundred, 100, "cem"));
+  result["oneHundred"] = Math.floor(value / 100);
+  console.log(result);
+  if (
+    result["oneHundred"] &&
+    amountOfNotes.oneHundred >= result["oneHundred"]
+  ) {
+    value -= 100 * result["oneHundred"];
+    response.push(output(result["oneHundred"], 100, "cem"));
   } else if (
-    result.oneHundred &&
-    amountOfNotes.oneHundred < result.oneHundred &&
+    result["oneHundred"] &&
+    amountOfNotes.oneHundred < result["oneHundred"] &&
     amountOfNotes.oneHundred > 0
   ) {
     value -= 100 * amountOfNotes.oneHundred;
     response.push(output(amountOfNotes.oneHundred, 100, "cem"));
   }
 
-  result.fifty = Math.floor(valor / 50);
+  result.fifty = Math.floor(value / 50);
 
   if (result.fifty && amountOfNotes.fifty >= result.fifty) {
     value -= 50 * result.fifty;
@@ -57,7 +60,7 @@ const outOfNotes = (value) => {
     response.push(output(amountOfNotes.fifty, 50, "cinquenta"));
   }
 
-  result.twenty = Math.floor(valor / 20);
+  result.twenty = Math.floor(value / 20);
 
   if (result.twenty && amountOfNotes.twenty >= result.twenty) {
     value -= 20 * result.twenty;
@@ -71,7 +74,7 @@ const outOfNotes = (value) => {
     response.push(output(amountOfNotes.twenty, 20, "vinte"));
   }
 
-  result.ten = Math.floor(valor / 10);
+  result.ten = Math.floor(value / 10);
 
   if (result.ten && amountOfNotes.ten >= result.ten) {
     value -= 10 * result.ten;
@@ -85,7 +88,7 @@ const outOfNotes = (value) => {
     response.push(output(amountOfNotes.ten, 10, "dez"));
   }
 
-  result.five = Math.floor(valor / 5);
+  result.five = Math.floor(value / 5);
 
   if (result.five && amountOfNotes.five >= result.five) {
     value -= 5 * result.five;
@@ -99,7 +102,7 @@ const outOfNotes = (value) => {
     response.push(output(amountOfNotes.five, 5, "cinco"));
   }
 
-  result.two = Math.floor(valor / 2);
+  result.two = Math.floor(value / 2);
 
   if (result.two && amountOfNotes.two >= result.two) {
     value -= 2 * result.two;
@@ -113,7 +116,7 @@ const outOfNotes = (value) => {
     response.push(output(amountOfNotes.two, 2, "dois"));
   }
 
-  result.one = Math.floor(valor / 1);
+  result.one = Math.floor(value / 1);
 
   if (result.one && amountOfNotes.one >= result.one) {
     value -= 1 * result.one;
@@ -126,6 +129,8 @@ const outOfNotes = (value) => {
     value -= 1 * amountOfNotes.one;
     response.push(output(amountOfNotes.one, 1, "um"));
   }
+
+  return response;
 };
 
 button.addEventListener("click", () => {
@@ -142,6 +147,7 @@ button.addEventListener("click", () => {
     message = outOfNotes(input_value);
 
     if (message.length > 1) {
+      message.push("e");
       last_position = message.splice(message.length - 2, 1);
       message.push(last_position[0]);
 
