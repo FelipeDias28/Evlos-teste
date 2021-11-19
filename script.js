@@ -127,3 +127,29 @@ const outOfNotes = (value) => {
     response.push(output(amountOfNotes.one, 1, "um"));
   }
 };
+
+button.addEventListener("click", () => {
+  let input_value = document.getElementById("value").value;
+  let current_number = document
+    .getElementById("account_balance")
+    .innerText.replace(",", ".");
+
+  let result =
+    Number.parseFloat(current_number) - Number.parseFloat(input_value);
+
+  if (result >= 0) {
+    account_balance.innerText = result.toFixed(2);
+    message = outOfNotes(input_value);
+
+    if (message.length > 1) {
+      last_position = message.splice(message.length - 2, 1);
+      message.push(last_position[0]);
+
+      current_value.innerText = message.join(" ");
+    } else {
+      current_value.innerText = message;
+    }
+  } else {
+    current_value.innerText = "Você não possui saldo para fazer esse saque";
+  }
+});
