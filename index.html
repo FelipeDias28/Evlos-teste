@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap"
+      rel="stylesheet"
+    />
+    <title>Evlos</title>
+  </head>
+  <body>
+    <header>
+      <!-- <h1>Evlos Bank</h1> -->
+      <img src="./evlos.png" alt="logo" />
+      <div class="price">
+        <h2>Saldo - R$</h2>
+        <h2 id="saldo_conta">122,50</h2>
+      </div>
+    </header>
+
+    <main>
+      <label for="box">Informe o valor de saque: </label>
+      <div class="input">
+        <input type="number" name="value" id="value" />
+        <button type="submit" id="btn">Sacar</button>
+      </div>
+      <div id="current_value"></div>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
