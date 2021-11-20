@@ -1,9 +1,7 @@
 let account_balance = document.getElementById("account_balance");
 let button = document.getElementById("btn");
-let current_value = document.getElementById("current_value");
 
 let amountOfNotes = [
-  // Colocar para cada nota atributo de quantidade e de valor
   { amount: 1, value_note: 100 },
   { amount: 3, value_note: 50 },
   { amount: 4, value_note: 20 },
@@ -14,8 +12,8 @@ let amountOfNotes = [
 ];
 
 const outOfNotes = (value) => {
-  result = {};
-  response = [];
+  let current_value = document.getElementById("current_value");
+  let response = [];
 
   for (i = 0; i < amountOfNotes.length; i++) {
     let amount = amountOfNotes[i].amount;
@@ -40,6 +38,7 @@ const outOfNotes = (value) => {
 };
 
 button.addEventListener("click", () => {
+  let current = document.getElementById("current_value");
   let input_value = document.getElementById("value").value;
   let current_number = document
     .getElementById("account_balance")
@@ -54,16 +53,15 @@ button.addEventListener("click", () => {
 
     if (message.length > 1) {
       message.push("e");
+
       last_position = message.splice(message.length - 2, 1);
       message.push(last_position[0]);
 
-      console.log("message: ", message.join(" "));
-
-      current_value.innerHTML = "FOi";
+      current.innerHTML = message.join(" ");
     } else {
-      current_value.innerText = "Aqui";
+      current.innerText = message;
     }
   } else {
-    current_value.innerText = "Você não possui saldo para fazer esse saque";
+    current.innerText = "Você não possui saldo para fazer esse saque";
   }
 });
