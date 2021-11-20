@@ -8,32 +8,54 @@ let amountOfNotes = [
   { amount: 1, value_note: 10 },
   { amount: 3, value_note: 5 },
   { amount: 12, value_note: 2 },
-  { amount: 1, value_note: 1 },
+  { amount: 10, value_note: 1 },
 ];
 
-const outOfNotes = (value) => {
-  let current_value = document.getElementById("current_value");
-  let response = [];
-  let fail_message = "";
+const verifyNotes = (value) => {
+  let sum = 0;
+  const last_value = value;
 
   for (i = 0; i < amountOfNotes.length; i++) {
-    let amount = amountOfNotes[i].amount;
-    let value_note = amountOfNotes[i].value_note;
+    const { amount, value_note } = amountOfNotes[i];
 
     let result = Math.floor(value / value_note);
 
     let enought_notes = amount - result;
 
     if (result && enought_notes >= 0) {
-      available = amount - result;
-
       current_value = result * value_note;
-
-      amountOfNotes[i].amount = amount - result;
-
-      response.push(`${result} nota de R$ ${value_note},00 `);
-
       value -= current_value;
+      sum += current_value;
+    }
+  }
+
+  return Number(last_value) === Number(sum);
+};
+
+const outOfNotes = (value) => {
+  let current_value = document.getElementById("current_value");
+  let response = [];
+  let fail_message = "";
+
+  let verify = verifyNotes(value);
+
+  if (verify) {
+    for (i = 0; i < amountOfNotes.length; i++) {
+      let amount = amountOfNotes[i].amount;
+      let value_note = amountOfNotes[i].value_note;
+
+      let result = Math.floor(value / value_note);
+
+      let enought_notes = amount - result;
+
+      if (result && enought_notes >= 0) {
+        current_value = result * value_note;
+        value -= current_value;
+
+        amountOfNotes[i].amount = amount - result;
+
+        response.push(`${result} nota de R$ ${value_note},00 `);
+      }
     }
   }
 
@@ -57,6 +79,10 @@ button.addEventListener("click", () => {
     return (current.innerText = "Você não possui saldo para fazer esse saque");
   }
 
+  if (input_value === "") {
+    return (current.innerText = "Digite um valor para saque");
+  }
+
   let message = outOfNotes(input_value);
 
   if (typeof message === "string") {
@@ -74,8 +100,4 @@ button.addEventListener("click", () => {
   } else {
     current.innerText = message;
   }
-
-  // else {
-  //   current.innerText = "Você não possui saldo para fazer esse saque";
-  // }
 });
