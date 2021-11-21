@@ -32,6 +32,21 @@ const verifyNotes = (value) => {
   return Number(last_value) === Number(sum);
 };
 
+const checkNotes = () => {
+  let responseNotes = "";
+  for (i = 0; i < amountOfNotes.length; i++) {
+    let amount = amountOfNotes[i].amount;
+    let value_note = amountOfNotes[i].value_note;
+
+    if (amount > 0) {
+      responseNotes += `${amount} - R$ ${value_note},00 `;
+    }
+  }
+
+  return `Com as notas disponíveis não é possível sacar essa quantidade de dinheiro, por favor tente outro valor 
+    Notas disponíveis: ${responseNotes}`;
+};
+
 const outOfNotes = (value) => {
   let current_value = document.getElementById("current_value");
   let response = [];
@@ -65,8 +80,7 @@ const outOfNotes = (value) => {
   }
 
   if (value > 0 || response === []) {
-    return (fail_message =
-      "Com as notas disponíveis não é possível sacar essa quantidade de dinheiro, por favor tente outro valor");
+    return (fail_message = checkNotes());
   }
 
   return response;
