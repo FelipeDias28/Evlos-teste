@@ -45,7 +45,6 @@ const outOfNotes = (value) => {
       let value_note = amountOfNotes[i].value_note;
 
       let result = Math.floor(value / value_note);
-
       let enought_notes = amount - result;
 
       if (result && enought_notes >= 0) {
@@ -53,9 +52,14 @@ const outOfNotes = (value) => {
         value -= current_value;
 
         amountOfNotes[i].amount = amount - result;
-        console.log(amountOfNotes);
 
         response.push(`${result} nota de R$ ${value_note},00 `);
+      } else if (result && amount) {
+        response.push(`${amount} nota de R$ ${value_note},00 `);
+        amountOfNotes[i].amount = amount - amount;
+
+        current_value = amount * value_note;
+        value -= current_value;
       }
     }
   }
