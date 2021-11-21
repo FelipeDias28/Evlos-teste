@@ -53,6 +53,7 @@ const outOfNotes = (value) => {
         value -= current_value;
 
         amountOfNotes[i].amount = amount - result;
+        console.log(amountOfNotes);
 
         response.push(`${result} nota de R$ ${value_note},00 `);
       }
@@ -60,8 +61,10 @@ const outOfNotes = (value) => {
   }
 
   if (value > 0 || response === []) {
-    return (fail_message = `Não é possível realizar o saque falta de notas, por favor tente outro valor`);
+    return (fail_message =
+      "Com as notas disponíveis não é possível sacar essa quantidade de dinheiro, por favor tente outro valor");
   }
+
   return response;
 };
 
