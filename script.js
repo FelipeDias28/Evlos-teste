@@ -19,7 +19,6 @@ const verifyNotes = (value) => {
     const { amount, value_note } = amountOfNotes[i];
 
     let result = Math.floor(value / value_note);
-
     let enought_notes = amount - result;
 
     if (result && enought_notes >= 0) {
@@ -50,7 +49,6 @@ const checkNotes = () => {
 const outOfNotes = (value) => {
   let current_value = document.getElementById("current_value");
   let response = [];
-  let fail_message = "";
 
   let verify = verifyNotes(value);
 
@@ -80,7 +78,7 @@ const outOfNotes = (value) => {
   }
 
   if (value > 0 || response === []) {
-    return (fail_message = checkNotes());
+    return checkNotes();
   }
 
   return response;
